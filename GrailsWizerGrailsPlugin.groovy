@@ -1,3 +1,5 @@
+import org.subethamail.wiser.Wiser
+
 class GrailsWizerGrailsPlugin {
     // the plugin version
     def version = "0.1"
@@ -8,12 +10,11 @@ class GrailsWizerGrailsPlugin {
         "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
     def title = "Grails Wizer Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def author = "Silvio Wangler"
+    def authorEmail = "silvio.wangler@gmail.com"
     def description = '''\
-Brief summary/description of the plugin.
+Uses wizer as SMTP server in order to test email sending in integration tests.
 '''
 
     // URL to the plugin's documentation
@@ -22,26 +23,31 @@ Brief summary/description of the plugin.
     // Extra (optional) plugin metadata
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
+    def license = "APACHE"
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
 
     // Any additional developers beyond the author specified above.
-//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
+    def developers = [ [ name: "Silvio Wangler", email: "silvio.wangler@gmail.com" ]]
 
     // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
+    def issueManagement = [ system: "GitHub", url: "https://github.com/saw303/grails-wizer/issues" ]
 
     // Online location of the plugin's browseable source code.
-//    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
+    def scm = [ url: "https://github.com/saw303/grails-wizer" ]
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+        wiser(Wiser) { bean ->
+            bean.initMethod = 'start'
+            bean.destroyMethod = 'stop'
+            port = 25000
+            hostname = 'localhost'
+        }
     }
 
     def doWithDynamicMethods = { ctx ->
