@@ -1,4 +1,5 @@
 *.iws
+*.iml
 *Db.properties
 *Db.script
 .settings
@@ -17,3 +18,5 @@ stacktrace.log
 /.link_to_grails_plugins/
 /target-eclipse/
 .idea
+.project
+.classpath
