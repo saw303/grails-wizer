@@ -1,4 +1,4 @@
-package grails.wizer
+package ch.silviowangler.grails.wizer
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
